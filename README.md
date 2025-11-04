@@ -21,11 +21,12 @@
 ```bash
 # Клонировать репозиторий
 git clone git@github.com:terrensmint/Lab3-Matrix.git
+cd Lab3-Matrix
 
 # Компиляция
 gcc -o test main.c
 
-# Запуск программы
+# Пример запуска программы с разными матрицами
 ./test matrix1.txt
 ./test matrix2.txt
 ./test matrix3.txt
