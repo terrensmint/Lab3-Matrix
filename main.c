@@ -33,8 +33,23 @@ int main(int argc, char **argv) {
     }
 
     int **matrix = (int **)malloc(N * sizeof(int *));   // выделение памяти под матрицу
+     if (!matrix) {
+        printf("Ошибка выделения памяти\n");
+        fclose(file);
+        return 1;
+    }
+    
     for (int i = 0; i < N; i++) {
         matrix[i] = (int *)malloc(M * sizeof(int));     // выделение памяти под строки матрицы
+        if (!matrix[i]) {
+            printf("Ошибка выделения памяти\n");
+            // Освобождаем уже выделенную память
+            for (int k = 0; k < i; k++) free(matrix[k]);
+            free(matrix);
+            fclose(file);
+            return 1;
+        }
+        
         for (int j = 0; j < M; j++) {
             if (fscanf(file, "%d", &matrix[i][j]) != 1) {   // заполняем матрицу значениями из файла
                 printf("Ошибка чтения элемента матрицы\n");
@@ -101,4 +116,5 @@ int main(int argc, char **argv) {
     free(matrix);
 
     return 0;
+
 }
